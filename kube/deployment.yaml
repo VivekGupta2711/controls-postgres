@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controls-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: controls-postgres
+  template:
+    metadata:
+      labels:
+        app: controls-postgres
+    spec:
+      containers:
+        - name: controls-postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: controldb
+            - name: POSTGRES_USER
+              value: sa
+            - name: POSTGRES_PASSWORD
+              value: password
